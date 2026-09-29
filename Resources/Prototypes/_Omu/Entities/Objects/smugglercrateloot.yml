@@ -160,10 +160,8 @@
   parent: OreBagOfHolding
   id: ClothingBeltShipbreaker
   name: Shipbreaker Belt
-  description: Teaches the wearer Shipbreaker
+  description: Functions as an ore bag and gives the wearer an understanding of the shipbreaker martial art
   components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Belt/judobelt.rsi
   - type: Clothing
     sprite: _Goobstation/Clothing/Belt/judobelt.rsi
   - type: GrantShipbreaker

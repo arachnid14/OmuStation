@@ -29,6 +29,7 @@
   - ShipbreakerGnashingTeeth
   - ShipbreakerKneeHaul
   - ShipbreakerCrashingWaves
+  - ShipbreakerSacrifice
 
 - type: combo
   id: ShipbreakerGnashingTeeth
@@ -62,3 +63,16 @@
   - Disarm
   event: !type:ShipbreakerCrashingWavesPerformedEvent
   staminaDamage: 25
+
+- type: combo
+  id: ShipbreakerSacrifice
+  name: Sacrifice
+  martialArtsForm: Shipbreaker
+  attacks:
+  - Disarm
+  - Disarm
+  event: !type:ShipbreakerSacrificePerformedEvent
+  damageType: Blunt
+  extraDamage: 15
+  ignoreArmorPierceFlags: All
+  performOnSelf: true

@@ -2,6 +2,7 @@
 
 using Content.Goobstation.Common.Grab;
 using Content.Goobstation.Common.MartialArts;
+using Content.Goobstation.Shared.Emoting;
 using Content.Goobstation.Shared.GrabIntent;
 using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Goobstation.Shared.MartialArts.Events;
@@ -10,6 +11,19 @@ using System.Linq;
 using Content.Shared.Clothing;
 using Content.Shared.Movement.Pulling.Components;
 using Robust.Shared.Audio;
+using Content.Goobstation.Shared.Weapons.MeleeVulnerability;
+using Content.Goobstation.Shared.Sprinting;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Stunnable;
+using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Physics.Components;
+using Content.Goobstation.Maths.FixedPoint; //omu
+using Content.Shared.Clothing.Components; //omu
+using Content.Shared.Damage; // omu
+using Content.Shared.Damage.Components; // omu
+using Content.Shared.Damage.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations;
+using Content.Shared.EntityTable.EntitySelectors; // omu
 
 namespace Content.Goobstation.Shared.MartialArts;
 
@@ -20,6 +34,7 @@ public partial class SharedMartialArtsSystem
         SubscribeLocalEvent<CanPerformComboComponent, ShipbreakerGnashingTeethPerformedEvent>(OnShipbreakerGnashing);
         SubscribeLocalEvent<CanPerformComboComponent, ShipbreakerKneeHaulPerformedEvent>(OnShipbreakerKneeHaul);
         SubscribeLocalEvent<CanPerformComboComponent, ShipbreakerCrashingWavesPerformedEvent>(OnShipbreakerCrashingWaves);
+        SubscribeLocalEvent<CanPerformComboComponent, ShipbreakerSacrificePerformedEvent>(OnShipbreakerSacrifice);
 
         SubscribeLocalEvent<GrantShipbreakerComponent, ClothingGotEquippedEvent>(OnGrantShipbreaker);
         SubscribeLocalEvent<GrantShipbreakerComponent, ClothingGotUnequippedEvent>(OnRemoveShipbreaker);
@@ -38,13 +53,16 @@ public partial class SharedMartialArtsSystem
     private void OnRemoveShipbreaker(Entity<GrantShipbreakerComponent> ent, ref ClothingGotUnequippedEvent args)
     {
         var user = args.Wearer;
+
+        // Omu Station
+        // Don't proceed if the user has non-removable Martial Arts knowledge
+        if (HasManualCqcKnowledge(user))
+            return;
+
         if (!TryComp<MartialArtsKnowledgeComponent>(user, out var martialArtsKnowledge))
             return;
 
         if (martialArtsKnowledge.MartialArtsForm != MartialArtsForms.Shipbreaker)
-            return;
-
-        if (!TryComp<MeleeWeaponComponent>(args.Wearer, out var meleeWeaponComponent))
             return;
 
         RemComp<MartialArtsKnowledgeComponent>(user);
@@ -62,7 +80,7 @@ public partial class SharedMartialArtsSystem
             || !TryUseMartialArt(ent, proto, out var target, out var downed))
             return;
 
-        DoDamage(ent, target, proto.DamageType, proto.ExtraDamage + ent.Comp.ConsecutiveGnashes * 5, out _);
+        DoDamage(ent, target, proto.DamageType, proto.ExtraDamage + ent.Comp.ConsecutiveGnashes, out _);
         ent.Comp.ConsecutiveGnashes++;
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit1.ogg"), target);
         if (!downed)
@@ -126,6 +144,21 @@ public partial class SharedMartialArtsSystem
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit2.ogg"), target);
         ComboPopup(ent, target, proto.Name);
         ent.Comp.LastAttacks.Clear();
+    }
+    private void OnShipbreakerSacrifice(Entity<CanPerformComboComponent> ent,
+        ref ShipbreakerSacrificePerformedEvent args)
+    {
+        if (!_proto.TryIndex(ent.Comp.BeingPerformed, out var proto)
+            || !TryUseMartialArt(ent, proto, out var target, out _)
+            || target != ent.Owner)
+            return;
+        DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _);
+        ApplyMultiplier(ent, 1.2f, 0f, TimeSpan.FromSeconds(10), MartialArtModifierType.MoveSpeed);
+        _modifier.RefreshMovementSpeedModifiers(ent);
+        ApplyMultiplier(ent, 1.2f, 0f, TimeSpan.FromSeconds(10));
+        ent.Comp.LastAttacks.Clear();
+        _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit1.ogg"), target);
+
     }
 }
 
