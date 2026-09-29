@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using Content.Goobstation.Shared.Changeling.Components;
-using Content.Goobstation.Shared.CustomFactionIcons;
+using Content.Goobstation.Common.Grab;
+using Content.Goobstation.Common.MartialArts;
+using Content.Goobstation.Shared.GrabIntent;
 using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Goobstation.Shared.MartialArts.Events;
-using Content.Goobstation.Shared.Projectiles;
-using Content.Shared.IdentityManagement;
-using Content.Shared.Interaction.Events;
+using Content.Shared.Weapons.Melee;
+using System.Linq;
+using Content.Shared.Clothing;
 using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Popups;
 using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Shared.MartialArts;
@@ -22,8 +21,8 @@ public partial class SharedMartialArtsSystem
         SubscribeLocalEvent<CanPerformComboComponent, ShipbreakerKneeHaulPerformedEvent>(OnShipbreakerKneeHaul);
         SubscribeLocalEvent<CanPerformComboComponent, ShipbreakerCrashingWavesPerformedEvent>(OnShipbreakerCrashingWaves);
 
-        SubscribeLocalEvent<GrantShipbreakerComponent, ClothingGotEquippedEvent>(OnWear);
-        SubscribeLocalEvent<GrantShipbreakerComponent, ClothingGotUnequippedEvent>(OnRemove);
+        SubscribeLocalEvent<GrantShipbreakerComponent, ClothingGotEquippedEvent>(OnGrantShipbreaker);
+        SubscribeLocalEvent<GrantShipbreakerComponent, ClothingGotUnequippedEvent>(OnRemoveShipbreaker);
     }
 
     #region Generic Methods
@@ -36,6 +35,22 @@ public partial class SharedMartialArtsSystem
         var user = args.Wearer;
         TryGrantMartialArt(user, ent.Comp);
     }
+    private void OnRemoveShipbreaker(Entity<GrantShipbreakerComponent> ent, ref ClothingGotUnequippedEvent args)
+    {
+        var user = args.Wearer;
+        if (!TryComp<MartialArtsKnowledgeComponent>(user, out var martialArtsKnowledge))
+            return;
+
+        if (martialArtsKnowledge.MartialArtsForm != MartialArtsForms.Shipbreaker)
+            return;
+
+        if (!TryComp<MeleeWeaponComponent>(args.Wearer, out var meleeWeaponComponent))
+            return;
+
+        RemComp<MartialArtsKnowledgeComponent>(user);
+        RemComp<CanPerformComboComponent>(user);
+    }
+
     #endregion
     #region Combo Methods
 

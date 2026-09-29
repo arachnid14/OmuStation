@@ -5,23 +5,3 @@
   components:
   - type: Stack
     count: 100
-
-- type: entity
-  parent: [ BaseItem, BaseSyndicateContraband ]
-  id: ShipbreakerScroll
-  name: Shipbreaker scroll
-  description: A scroll filled with strange markings. It seems to be drawings of some sort of martial art.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Wizard/Objects/scroll.rsi
-    layers:
-    - state: scroll2
-  - type: Item
-    sprite: _Goobstation/Wizard/Objects/scroll.rsi
-    size: Small
-  - type: StaticPrice
-    price: 3000
-  - type: GrantShipbreaker
-  - type: GuideHelp
-    guides:
-    - SleepingCarp

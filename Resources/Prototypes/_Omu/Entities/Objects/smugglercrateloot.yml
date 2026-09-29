@@ -155,3 +155,15 @@
 #  name: Rod of Asclepius
 #  suffix: Healing
 #  components:
+
+- type: entity
+  parent: OreBagOfHolding
+  id: ClothingBeltShipbreaker
+  name: Shipbreaker Belt
+  description: Teaches the wearer Shipbreaker
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Clothing/Belt/judobelt.rsi
+  - type: Clothing
+    sprite: _Goobstation/Clothing/Belt/judobelt.rsi
+  - type: GrantShipbreaker
