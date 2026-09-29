@@ -115,3 +115,11 @@ public sealed partial class GrantHellRipComponent : GrantMartialArtKnowledgeComp
 
     public override LocId? LearnMessage { get; set; } = "hellrip-success-learned";
 }
+
+[RegisterComponent]
+public sealed partial class GrantShipbreakerComponent : GrantMartialArtKnowledgeComponent
+{
+    [DataField]
+    public override MartialArtsForms MartialArtsForm { get; set; } = MartialArtsForms.Shipbreaker;
+}
+

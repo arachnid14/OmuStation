@@ -1,0 +1,64 @@
+- type: martialArt
+  id: Shipbreaker
+  martialArtsForm: Shipbreaker
+  roundstartCombos: ShipbreakerMoves
+  randomDamageModifier: True
+  baseDamageModifier: 5
+  damageModifierType: Slash
+  randomSayings:
+  - carp-saying-huah
+  - carv-vaying-hya
+  - carp-saying-choo
+  - carp-saying-wuo
+  - carp-saying-kya
+  - carp-saying-huh
+  - carp-saying-hiyoh
+  - carp-saying-strike
+  - carp-saying-bite
+  randomSayingsDowned:
+  - carp-saying-banzai
+  - carp-saying-kiya
+  - carp-saying-omae
+  - carp-saying-see
+  - carp-saying-time
+  - carp-saying-cowabunga
+
+- type: comboList
+  id: ShipbreakerMoves
+  combos:
+  - ShipbreakerGnashingTeeth
+  - ShipbreakerKneeHaul
+  - ShipbreakerCrashingWaves
+
+- type: combo
+  id: ShipbreakerGnashingTeeth
+  name: Gnashing Teeth
+  martialArtsForm: Shipbreaker
+  attacks:
+  - Harm
+  - Harm
+  event: !type:ShipbreakerGnashingTeethPerformedEvent
+  damageType: Slash
+  extraDamage: 20
+
+- type: combo
+  id: ShipbreakerKneeHaul
+  name: Knee Haul
+  martialArtsForm: Shipbreaker
+  attacks:
+  - Harm
+  - Grab
+  event: !type:ShipbreakerKneeHaulPerformedEvent
+  extraDamage: 10
+  paralyzeTime: 6
+  staminaDamage: 60
+
+- type: combo
+  id: ShipbreakerCrashingWaves
+  name: Crashing Waves
+  martialArtsForm: Shipbreaker
+  attacks:
+  - Harm
+  - Disarm
+  event: !type:ShipbreakerCrashingWavesPerformedEvent
+  staminaDamage: 25
