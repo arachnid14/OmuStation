@@ -354,8 +354,13 @@
           rolls: 4
         - id: GrenadeFoamDart
           amount: 4
-        - id: WeaponSniperFoam # Omu
-          amount: 1
+        - !type:NestedSelector #Omu start
+          tableId: RandomSpecialFoamGunTable
+          rolls: 1 
+        - id: ClothingOuterVestFoamRed
+          amount: 2
+        - id: ClothingOuterVestFoamBlue
+          amount: 2
 
 - type: entity
   parent: CrateGenericSteel

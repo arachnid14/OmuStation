@@ -98,7 +98,7 @@
         Heat: -6
         Shock: -6
         Structural: -6
-  - type: tag #Omu start
+  - type: Tag #Omu start
     tags:
     - Nail
     - Trash
