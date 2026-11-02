@@ -1,0 +1,9 @@
+- type: entityTable
+  id: RandomSpecialFoamGunTable # Extra special foam weapon that spawns once per foam force crate
+  table: !type:GroupSelector
+    children:
+    - id: WeaponSniperFoam
+    - id: WeaponLightMachineGunL6Foam
+      weight: 0.1 # None of us want to see too many of these
+    - id: FoamRapier
+    - id: ClothingBeltFoamSheathFilled

@@ -91,4 +91,16 @@
       tags:
       - BulletFoam
 
+- type: entity
+  parent: ClothingOuterVestHazard
+  id: ClothingOuterVestFoamRed
+  name: Red Foam Vest
+  description: A bright armor piece to designate your team, why are we in a box canyon fighting blue guys?
+  components:
 
+- type: entity:
+  parent: ClothingOuterVestHazard
+  id: ClothingOuterVestFoamBlue
+  name: Blue Foam Vest
+  description: A bright armor piece to designate your team, go kill sarge!
+  components:
