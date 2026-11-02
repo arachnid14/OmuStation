@@ -1,0 +1,41 @@
+- type: constructionGraph
+  id: BulletFoamNail
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: icon
+      steps:
+      - tag: Nail
+        name: construction-graph-tag-nail
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tag: BulletFoam
+        name: construction-graph-tag-foamdart
+        icon:
+          sprite: Objects/Fun/Foam/foam_dart.rsi
+          state: foamdart
+  - node: icon
+    entity: BulletFoamNail
+
+- type: constructionGraph
+  id: BulletFoamNailArmorPiercing
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: icon
+      steps:
+      - tag: NailArmorPiercing
+        name: construction-graph-tag-nailarmorpiercing
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tag: BulletFoam
+        name: construction-graph-tag-foamdart
+        icon:
+          sprite: Objects/Fun/Foam/foam_dart.rsi
+          state: foamdart
+  - node: icon
+    entity: BulletFoamNailArmorPiercing

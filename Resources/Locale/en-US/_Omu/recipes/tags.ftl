@@ -4,3 +4,6 @@ construction-graph-tag-jamjar-glasses = jamjar glasses
 construction-graph-tag-mesons = meson goggles
 construction-graph-tag-work-mantle = work mantle
 construction-graph-tag-experimental-welder = experimental welding tool
+construction-graph-tag-foamdart = foam dart
+construction-graph-tag-nail = nail
+construction-graph-tag-nailarmorpiercing = armor piercing nail
