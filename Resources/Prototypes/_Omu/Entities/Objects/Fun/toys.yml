@@ -4,14 +4,16 @@
   name: Foam Rapier
   description: En garde!
   components:
+  - type: MeleeWeapon
   - type: StaminaDamageOnHit
     Damage: 8
-  - type: MeleeWeapon
   - type: UseDelay
     delay: 3
   - type: Reflect
     reflectProb: 0.05
-    spread: 0 
+    spread: 3
+    soundOnReflect:
+      path: /Audio/_Goobstation/Effects/Parry/parry.ogg
   - type: Contraband
     severity: Honkraband
 
@@ -43,6 +45,8 @@
     - FullAuto
     soundGunshot:
       path: /Audio/_Omu/Weapons/ToyLMG.ogg
+      params:
+        volume: -0.5
   - type: PacifismAllowedGun
   - type: BallisticAmmoProvider
     autoCycle: true
@@ -53,3 +57,29 @@
       - BulletFoam
   - type: Wieldable
     unwieldOnUse: false
+
+- type: entity
+  parent: BaseNullrod
+  id: NullRodFoam
+  name: Foam Rod
+  description: This is what you devoted your life to?
+  components:
+  - type: Sprite
+    sprite: _DV/Objects/Fun/Toys/foam_sabre.rsi
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Holy: 15
+    soundHit:
+      path: /Audio/_DV/CosmicCult/cosmicsword_hit.ogg #placeholder
+      params:
+        variation: 0.2
+        volume: 1
+    animationRotation: -135
+    wideAnimationRotation: -135
+  - type: StaminaDamageOnHit
+    damage: 5
+  - type: Tag
+    tags:
+    - Nullrod

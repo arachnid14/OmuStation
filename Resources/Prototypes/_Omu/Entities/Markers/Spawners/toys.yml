@@ -4,6 +4,6 @@
     children:
     - id: WeaponSniperFoam
     - id: WeaponLightMachineGunL6Foam
-      weight: 0.1 # None of us want to see too many of these
+      weight: 0.2 # None of us want to see too many of these
     - id: FoamRapier
     - id: ClothingBeltFoamSheathFilled
