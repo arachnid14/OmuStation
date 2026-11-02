@@ -357,10 +357,6 @@
         - !type:NestedSelector #Omu start
           tableId: RandomSpecialFoamGunTable
           rolls: 1 
-        - id: ClothingOuterVestFoamRed
-          amount: 2
-        - id: ClothingOuterVestFoamBlue
-          amount: 2
 
 - type: entity
   parent: CrateGenericSteel

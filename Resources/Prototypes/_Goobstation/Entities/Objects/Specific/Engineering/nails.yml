@@ -98,11 +98,6 @@
         Heat: -6
         Shock: -6
         Structural: -6
-  - type: Tag #Omu start
-    tags:
-    - Nail
-    - Trash
-    - NailArmorPiercing #Omu end
 
 - type: entity
   parent: BaseItem

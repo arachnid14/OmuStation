@@ -1,28 +1,4 @@
 - type: entity
-  parent: BulletFoam
-  id: BulletFoamNail
-  name: Nail Dart
-  description: A dart that has been modified with a nail, ouch.
-  components:
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Piercing: 3 #currently the same as default nails
-      armorPenetration: -1.75
-
-- type: entity
-  parent: [ BulletFoam, BaseSyndicateContraband ]
-  id: BulletFoamNailArmorPiercing
-  name: AP Nail Dart
-  description: A dart that has been modified with an extra strong armor-piercing nail.
-  components:
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Piercing: 3
-      armorPenetration: 0.65
-
-- type: entity
   parent: WardenRapier
   id: FoamRapier
   name: Foam Rapier
@@ -67,6 +43,7 @@
     - FullAuto
     soundGunshot:
       path: /Audio/_Omu/Weapons/ToyLMG.ogg
+  - type: PacifismAllowedGun
   - type: BallisticAmmoProvider
     autoCycle: true
     capacity: 100
@@ -76,17 +53,3 @@
       - BulletFoam
   - type: Wieldable
     unwieldOnUse: false
-
-- type: entity
-  parent: WeaponLightMachineGunL6Foam
-  id: Debugl6nails
-  name: Foam L6 SAW
-  suffix: AP nails
-  components:
-  - type: BallisticAmmoProvider
-    autoCycle: true
-    capacity: 100
-    proto: BulletFoamNailArmorPiercing
-    whitelist:
-      tags:
-      - BulletFoam
