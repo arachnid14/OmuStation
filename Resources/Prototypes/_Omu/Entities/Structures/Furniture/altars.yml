@@ -1,0 +1,26 @@
+- type: entity
+  id: AltarFoam
+  parent: AltarBase
+  name: Foam Flinging Altar
+  description: Altar of all those who fling foam.
+  components:
+  - type: Sprite
+    sprite: _ShitChap/Structures/dragonaltar.rsi
+    layers:
+    - state: dragonaltar
+    - state: miniportal
+      shader: unshaded
+  - type: Icon
+    sprite: _ShitChap/Structures/dragonaltar.rsi
+    state: dragonaltar
+  - type: Construction
+    graph: AltarsGraph
+    node: AltarFoamNode
+  - type: AltarSource
+    rodProto: NullRodFoam
+    effectProto: EffectSpark
+    soundPath: /Audio/Effects/hallelujah.ogg
+  - type: PointLight
+    color: "#366db5"
+    radius: 1.5
+    energy: 1

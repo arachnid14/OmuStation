@@ -149,6 +149,14 @@
       - tag: Book
         name: construction-graph-tag-book
         doAfter: 3
+    - to: AltarFoamNode
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - tag: BulletFoam
+        name: construction-graph-tag-foamdart
+        doAfter: 3
 
   #Nullrod Altars
   - node: BananiumAltarNode
@@ -314,6 +322,18 @@
       completed:
       - !type:SpawnPrototype
         prototype: BookRandom
+        amount: 1
+      steps:
+      - tool: Prying
+        doAfter: 1
+
+  - node: AltarFoamNode
+    entity: AltarFoam
+    edges:
+    - to: AltarConvertNode
+      completed:
+      - !type:SpawnPrototype
+        prototype: BulletFoam
         amount: 1
       steps:
       - tool: Prying

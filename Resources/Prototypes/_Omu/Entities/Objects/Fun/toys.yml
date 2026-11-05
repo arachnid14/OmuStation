@@ -65,7 +65,7 @@
   description: This is what you devoted your life to?
   components:
   - type: Sprite
-    sprite: _DV/Objects/Fun/Toys/foam_sabre.rsi
+    sprite: _DV/Objects/Fun/Toys/foam_sabre.rsi #placeholder
   - type: MeleeWeapon
     attackRate: 1
     damage:
